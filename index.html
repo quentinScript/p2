@@ -20,7 +20,7 @@
     <div class="full none"></div>
     <div class="parent">
         <div class="headerGauche">
-            <div class="kinoai" style="background-image: url(../img/kinoai.png); background-size:contain"></div>
+            <div class="kinoai" style="background-image: url(../img/kinoai.png); background-size:contain; "></div>
             <div style="justify-content: flex-end ; display:flex;width: calc(100% - 50px);;">
                 <div id="preparation">
                     <span class="iconify" data-inline="false" data-icon="gg:arrow-long-right-e" style="font-size: 24px;color: #e4e1e8; margin:14px"></span>
@@ -210,7 +210,7 @@
             <div id="apercuPrepa" class="none" style="height:calc(100% - 32px)">
                 <div id="imgPrepa"></div>
             </div>
-            <div id="apercuEditGlobal" class="row" style="height: calc(100% - 32px)">
+            <div id="apercuEditGlobal" class="row hide" style="height: calc(100% - 32px)">
                 <div class="apercuFinal .img-preview" >
                     <img id="croppedImage" style="margin-top:10vh">
                 </div>
@@ -236,7 +236,10 @@
     </div>
 
     <div class="overlay none">
+        <div class="row s-between">
         <h3>Share Répétition 15/05</h3>
+        <span id="close" class="iconify" data-inline="false" data-icon="gg:close"style="color:#E4E1E8; cursor:pointer"></span>
+        </div>
         <br>
         <div class="block">
             <div class="row s-between">
@@ -310,6 +313,10 @@
             </div>
         </div>
     </div>
+
+    <div id="popUpAddActor" class="hide"></div>
+
+
     <script src="https://code.iconify.design/1/1.0.6/iconify.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" charset="utf-8"></script>

@@ -4,29 +4,51 @@ let inputActor = false;
 
 
 $(document).ready(function(){
+    // timeline prend la largeur width:100%
     $(".toggleTimeline").click(timelineShow);
+    // reduire la taille d'une classe dans l'inspecteur
     $("[data-toggle-show]").click(toggleShowInspecteur);
+    // acteur choix ou non
     $("[data-button]:not([data-button='add'])").click(buttonActor);
     sliderRange();
-    $('.headerDroite [data-button], .cross, .full').click(overlay);
+    //share
+    $('.headerDroite [data-button],#close, .full').click(overlay);
     cropImage();
+    // resize + draggable
     resizeElement();
+    // ajout acteurs
     $('.hovAdd').mouseenter(mouseEnterActor).mouseleave(mousLeaveActor);
+    // ajouter un acteur avec bouton check ou la touche entrer
     $('.check').click(addActor);
+    $("#actor").on('keyup', function (e) {
+        if (e.key === 'Enter' || e.keyCode === 13) {
+            addActor();
+        }
+    });
+    //menu
     $('#edit').click(edit);
     $('#preparation').click(preparation);
+
+    //On attend .2s avant d'exécuter d'afficher preparation car sinon le crop d'imagebug
+    setTimeout(preparation, 200);
+    // popup
+    setTimeout(function(){
+        $('#popUpAddActor').removeClass("hide");
+    }, 1000);
 });
 
 function mousLeaveActor(){
+    // si input vide reset sinon il reste visible
     if (document.getElementById('actor').value == '') {
         inputActor = false;
         mouseEnterActor();
     }else{ inputActor = true;
-        // $('[data-button="add"] img').css('opacity', '100%');
     }
 }
 
 function mouseEnterActor(){
+    // remove popup
+    $('#popUpAddActor').addClass('hide');
     if (inputActor == false) {
         $('[data-button="add"]').toggleClass("show");
         $('.check').toggleClass('show');
@@ -36,18 +58,22 @@ function mouseEnterActor(){
 
 function addActor(){
     let saisie = document.getElementById('actor').value;
-    nomActeurs.push(saisie);
-    let html="";
-    let htmlIspecteur="";
-    for (var i = 0; i < nomActeurs.length; i++) {
-        html += "<div>"+nomActeurs[i]+"</div>";
-        htmlIspecteur += "<div data-button='0'>"+nomActeurs[i]+"</div>";
+    if (saisie != "") {
+
+
+        nomActeurs.push(saisie);
+        let html="";
+        let htmlIspecteur="";
+        for (var i = 0; i < nomActeurs.length; i++) {
+            html += "<div>"+nomActeurs[i]+"</div>";
+            htmlIspecteur += "<div data-button='0'>"+nomActeurs[i]+"</div>";
+        }
+        $('.timePerso').html(html);
+        $('#actors').html(htmlIspecteur);
+        $('[data-show="0"]').html(htmlIspecteur);
+        $(".hovAdd").addClass("plus");
+        document.getElementById('actor').value = "";
     }
-    $('.timePerso').html(html);
-    $('#actors').html(htmlIspecteur);
-    $('[data-show="0"]').html(htmlIspecteur);
-    $(".hovAdd").addClass("plus");
-    document.getElementById('actor').value = "";
 }
 
 
@@ -133,7 +159,7 @@ function resizeElement(){
 
     $( ".overlay" ).draggable({
         containment: "document",
-        cursor: "crosshair"
+        cursor: "move"
     });
     $( ".blockTime" ).draggable({
         axis: "x",
@@ -154,6 +180,8 @@ function resizeElement(){
 }
 
 function edit(){
+    $('#apercuEditGlobal').removeClass('hide');
+    $('#popUpAddActor').addClass('hide');
     $("#preparation").removeClass("show");
     $("#edit").addClass("show");
     $('.timeSound').removeClass("prepa");

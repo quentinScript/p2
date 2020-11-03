@@ -86,6 +86,7 @@ p{
 }
 .apercu {
     grid-area: 2 / 2 / 3 / 4;
+    background-color: black;
     /* height: 100%; */
 }
 
@@ -222,6 +223,26 @@ p{
     width: 2px;
     background:var(--color-green);
 }
+#popUpAddActor{
+    position: absolute;
+    width: 152px;
+    height: 60px;
+    background-image: url(../img/popup.svg);
+    background-size: contain;
+    background-repeat: no-repeat;
+    top: 115px;
+    left:calc( 232px + 2%);
+    transition: opacity ease .4s;
+}
+
+#popUpAddActor.hide{
+    opacity: 0;
+}
+
+#apercuEditGlobal.hide{
+    visibility: hidden;
+}
+
 
 img{
     max-width: 100%;
