@@ -22,11 +22,11 @@
         <div class="headerGauche">
             <div class="kinoai" style="background-image: url(../img/kinoai.png); background-size:contain"></div>
             <div style="justify-content: flex-end ; display:flex;width: calc(100% - 50px);;">
-                <div>
+                <div id="preparation">
                     <span class="iconify" data-inline="false" data-icon="gg:arrow-long-right-e" style="font-size: 24px;color: #e4e1e8; margin:14px"></span>
                     <span class="tooltiptext">Préparation</span>
                 </div>
-                <div class="show">
+                <div class="show" id="edit">
                     <span class="iconify" data-inline="false" data-icon="gg:camera" style="font-size: 24px;color: #e4e1e8; margin:14px"></span>
                 </div>
                 <div>
@@ -43,14 +43,6 @@
             </div>
             <!-- <span>Répétition 15/05</span> -->
         </div>
-        <div class="inspecteur none">
-            <div class="row alignDroite">
-                <div class="toggleTimeline pointer">
-                    <span class="iconify" data-inline="false" data-icon="gg:toolbar-bottom" style="color: #e4e1e8; font-size: 21px;margin-left:10px"></span>
-                    <span class="iconify none" data-inline="false" data-icon="gg:toolbar-left" style="color: #e4e1e8; font-size: 21px;margin-left:10px"></span>
-                </div>
-            </div>
-        </div>
         <div class="inspecteur ">
             <div class="row alignDroite">
                 <div class="toggleTimeline pointer">
@@ -65,10 +57,10 @@
                     <h3 data-toggle-show="0" class="pointer none">+</h3>
                 </div>
                 <div data-show="0">
-                    <div data-button="0">Eric</div>
+                    <!-- <div data-button="0">Eric</div>
                     <div data-button="1">Jacques</div>
                     <div data-button="disabled">Henry</div>
-                    <div data-button="disabled">Alexandre</div>
+                    <div data-button="disabled">Alexandre</div> -->
                 </div>
             </div>
             <div class="block">
@@ -146,7 +138,7 @@
 
                 </div>
             </div>
-            <div class="block none">
+            <div class="block prepa">
                 <div class="row s-between">
                     <h3>Acteurs </h3>
                     <h3 data-toggle-show="4" class="pointer">-</h3>
@@ -155,8 +147,10 @@
                 <div data-show="4">
                     <div id="actors"></div>
                     <div class="hovAdd relative" style="height:26px">
-                        <div data-button="add"></div>
-                            <input placeholder="Acteur A" type="text" id="actor" value="">
+                        <div data-button="add">
+                            <img src="./img/addPeople.svg" style="height:24px">
+                        </div>
+                            <input placeholder="Acteur A" type="text" id="actor" value="" style="width: calc(100% - 40px);margin:5px">
                             <div class="check">
                                 <span class="iconify" data-inline="false" data-icon="gg:check" style="font-size:24px; color:#E4E1E8; margin:2px"></span>
                             </div>
@@ -164,9 +158,6 @@
                     </div>
                     <!-- <div data-button="0">Eric</div> -->
                 </div>
-            </div>
-            <div class="block ">
-                <div id="refresh">REFRESH</div>
             </div>
         </div>
         <div class="timeline">
@@ -216,7 +207,10 @@
             <div class="montagePerso"> </div>
         </div>
         <div class="apercu">
-            <div class="row" style="height: calc(100% - 32px)">
+            <div id="apercuPrepa" class="none" style="height:calc(100% - 32px)">
+                <div id="imgPrepa"></div>
+            </div>
+            <div id="apercuEditGlobal" class="row" style="height: calc(100% - 32px)">
                 <div class="apercuFinal .img-preview" >
                     <img id="croppedImage" style="margin-top:10vh">
                 </div>

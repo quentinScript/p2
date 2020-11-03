@@ -13,14 +13,17 @@ $(document).ready(function(){
     resizeElement();
     $('.hovAdd').mouseenter(mouseEnterActor).mouseleave(mousLeaveActor);
     $('.check').click(addActor);
+    $('#edit').click(edit);
+    $('#preparation').click(preparation);
 });
 
 function mousLeaveActor(){
     if (document.getElementById('actor').value == '') {
         inputActor = false;
         mouseEnterActor();
-
-    }else{ inputActor = true}
+    }else{ inputActor = true;
+        // $('[data-button="add"] img').css('opacity', '100%');
+    }
 }
 
 function mouseEnterActor(){
@@ -42,6 +45,7 @@ function addActor(){
     }
     $('.timePerso').html(html);
     $('#actors').html(htmlIspecteur);
+    $('[data-show="0"]').html(htmlIspecteur);
     $(".hovAdd").addClass("plus");
     document.getElementById('actor').value = "";
 }
@@ -86,40 +90,23 @@ function overlay(){
 
 function timeline(){
     valTime = $(".blockTime").css('left');
-    console.log(valTime);
+    // console.log(valTime);
 }
 
 function cropImage(){
-    // var $image = $('#image');
     let   cropper = null;
+
     const myGreatImage = document.getElementById('image');
     const croppedImage = document.getElementById("croppedImage");
 
     cropper = new Cropper(myGreatImage,{
         aspectRatio : 16/9,
-        // scalable : false
         zoomable:false,
         crop(event) {
             const canvas = this.cropper.getCroppedCanvas();
             croppedImage.src = canvas.toDataURL('image/png');
         }
     });
-
-    // $image.cropper({
-    //     aspectRatio: 16 / 9,
-    //     crop: function(event) {
-    //         console.log(event.detail.x);
-    //         console.log(event.detail.y);
-    //         console.log(event.detail.width);
-    //         console.log(event.detail.height);
-    //         console.log(event.detail.rotate);
-    //         console.log(event.detail.scaleX);
-    //         console.log(event.detail.scaleY);
-    //         const canvas = this.cropper.getCroppedCanvas();
-    //         croppedImage.src = canvas.toDataURL('image/png');
-    //     }
-    // });
-    // var cropper = $image.data('cropper');
 }
 
 function resizeElement(){
@@ -166,13 +153,28 @@ function resizeElement(){
     });
 }
 
+function edit(){
+    $("#preparation").removeClass("show");
+    $("#edit").addClass("show");
+    $('.timeSound').removeClass("prepa");
+    $('.timePerso').removeClass("prepa");
+    $('.inspecteur .block:not(.prepa)').css('display','block');
+    $('.inspecteur .block.prepa').css('display','none');
+    $('#apercuPrepa').addClass('none');
+    $('#apercuEditGlobal').removeClass('none');
+}
+
 function preparation(){
-
+    $("#preparation").addClass("show");
+    $("#edit").removeClass("show");
+    $('.timeSound').addClass("prepa");
+    $('.timePerso').addClass("prepa");
+    $('.inspecteur .block:not(.prepa)').css('display','none');
+    $('.inspecteur .block.prepa').css('display','block');
+    $('#apercuPrepa').removeClass('none');
+    $('#apercuEditGlobal').addClass('none');
 }
 
-function cropImag2(){
-    let cropper = null;
-}
 
 function inputText(){
 
