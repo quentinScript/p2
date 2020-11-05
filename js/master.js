@@ -1,6 +1,7 @@
 let nomActeurs = [];
 let valTime= 0;
 let inputActor = false;
+let actorCheck = 0;
 
 
 $(document).ready(function(){
@@ -16,6 +17,8 @@ $(document).ready(function(){
     cropImage();
     // resize + draggable
     resizeElement();
+    // affecter les noms aux tracklet
+    $('[data-rect]').hover(rectHover);
     // ajout acteurs
     $('.hovAdd').mouseenter(mouseEnterActor).mouseleave(mousLeaveActor);
     // ajouter un acteur avec bouton check ou la touche entrer
@@ -29,8 +32,8 @@ $(document).ready(function(){
     $('#edit').click(edit);
     $('#preparation').click(preparation);
 
-    //On attend .2s avant d'exécuter d'afficher preparation car sinon le crop d'imagebug
-    setTimeout(preparation, 200);
+    //On attend .3s avant d'exécuter d'afficher preparation car sinon le crop d'imagebug
+    setTimeout(preparation, 300);
     // popup
     setTimeout(function(){
         $('#popUpAddActor').removeClass("hide");
@@ -49,6 +52,7 @@ function mousLeaveActor(){
 function mouseEnterActor(){
     // remove popup
     $('#popUpAddActor').addClass('hide');
+    // si l'input est vide
     if (inputActor == false) {
         $('[data-button="add"]').toggleClass("show");
         $('.check').toggleClass('show');
@@ -58,8 +62,8 @@ function mouseEnterActor(){
 
 function addActor(){
     let saisie = document.getElementById('actor').value;
+    let close = "<div data-button='0'><span class='iconify' data-inline='false' data-icon='gg:close'style='background-color:#E4E1E8; border-radius: 2px;color: #628C6E;cursor:pointer'></span></div>";
     if (saisie != "") {
-
 
         nomActeurs.push(saisie);
         let html="";
@@ -71,11 +75,25 @@ function addActor(){
         $('.timePerso').html(html);
         $('#actors').html(htmlIspecteur);
         $('[data-show="0"]').html(htmlIspecteur);
+        //rect assigne
+        $('[data-rect]').html(close + htmlIspecteur);
         $(".hovAdd").addClass("plus");
         document.getElementById('actor').value = "";
     }
 }
 
+function rectHover(){
+    let select = $(this).data('rect');
+    $('[data-rect="'+select+'"] [data-button]').toggleClass('hide');
+    // au click afficher les != actors
+    $('[data-rect] [data-button]').click(function rect(){
+        $('[data-rect="'+select+'"]').addClass('ok');
+        //si tous acteurs ont été assigné  > popup moment suivant
+        if ($('[data-rect="0"]').hasClass('ok') && $('[data-rect="1"]').hasClass('ok')) {
+            $('#popUpSuivant').removeClass('hide');
+        }
+    });
+}
 
 function timelineShow(){
     $(".inspecteur").toggleClass("show");
@@ -116,7 +134,6 @@ function overlay(){
 
 function timeline(){
     valTime = $(".blockTime").css('left');
-    // console.log(valTime);
 }
 
 function cropImage(){
@@ -145,22 +162,18 @@ function resizeElement(){
         minWidth: 300
     });
 
-    // $("#rectEdit").draggable({
-    //     containment: ".imgEdit",
-    //     cursor: "crosshair",
-    // }).resizable({
-    //     aspectRatio: 16 / 9
-    // });
-
     // $("#colApercu").resizable({
     //     handleSelector: ".controls",
     //     resizeWidth: false
     // });
 
+    //share overlay
     $( ".overlay" ).draggable({
         containment: "document",
         cursor: "move"
     });
+
+    // curseur timeline + màj timecode
     $( ".blockTime" ).draggable({
         axis: "x",
         containment: ".time2",
@@ -190,6 +203,9 @@ function edit(){
     $('.inspecteur .block.prepa').css('display','none');
     $('#apercuPrepa').addClass('none');
     $('#apercuEditGlobal').removeClass('none');
+    $('#popUpSuivant').addClass('hide');
+    $('#prepaSuivant').addClass('none');
+
 }
 
 function preparation(){
@@ -201,30 +217,6 @@ function preparation(){
     $('.inspecteur .block.prepa').css('display','block');
     $('#apercuPrepa').removeClass('none');
     $('#apercuEditGlobal').addClass('none');
-}
+    $('#prepaSuivant').removeClass('none');
 
-
-function inputText(){
-
-    function show() {
-        var p = document.getElementById('pwd');
-        p.setAttribute('type', 'text');
-    }
-
-    function hide() {
-        var p = document.getElementById('pwd');
-        p.setAttribute('type', 'password');
-    }
-
-    var pwShown = 0;
-
-    document.getElementById("eye").addEventListener("click", function () {
-        if (pwShown == 0) {
-            pwShown = 1;
-            show();
-        } else {
-            pwShown = 0;
-            hide();
-        }
-    }, false);
 }

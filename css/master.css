@@ -87,6 +87,7 @@ p{
 .apercu {
     grid-area: 2 / 2 / 3 / 4;
     background-color: black;
+    position: relative;
     /* height: 100%; */
 }
 
@@ -223,20 +224,31 @@ p{
     width: 2px;
     background:var(--color-green);
 }
-#popUpAddActor{
+.popup{
     position: absolute;
     width: 152px;
     height: 60px;
-    background-image: url(../img/popup.svg);
     background-size: contain;
     background-repeat: no-repeat;
-    top: 115px;
-    left:calc( 232px + 2%);
     transition: opacity ease .4s;
 }
 
-#popUpAddActor.hide{
+.popup.hide{
     opacity: 0;
+}
+
+#popUpAddActor{
+
+    top: 115px;
+    left:calc( 232px + 2%);
+    background-image: url(../img/popup.svg);
+}
+
+#popUpSuivant{
+    height: 80px;
+    bottom: -9px;
+    left: 46%;
+    background-image: url(../img/popup2.svg);
 }
 
 #apercuEditGlobal.hide{
@@ -300,6 +312,70 @@ img{
 .tools{
     padding: 4px;
 }
+
+[data-button="0"] input{
+    background: none;
+    border : none;
+    text-align: center;
+    width: 100%;
+    color: var(--color-grey);
+}
+
+#apercuPrepa{
+    position: relative;
+}
+
+[data-rect]{
+    border: 2px solid var(--color-grey);
+    opacity: .9;
+    border-radius: 4px;
+    position: absolute;
+    display: flex;
+    /* align-items: flex-end; */
+    padding: 5px;
+    transition: all ease .2s;
+}
+
+[data-rect].ok{
+    border: var(--color-green) solid 4px;
+}
+
+[data-rect] [data-button]{
+    height: 18px;
+    font-size: 9px;
+    line-height: normal;
+    margin: 0 auto;
+    opacity: 0;
+    transition: .2s all ease;
+
+
+}
+
+[data-rect] [data-button].hide{
+    opacity: 1;
+}
+
+
+[data-rect]:hover{
+    /* box-shadow: 0px 0px 64px 305px rgba(0, 0, 0, 0.25); */
+
+}
+
+[data-rect="0"]{
+    width: 75px;
+    top: 30%;
+    left: 39%;
+    height: 195px;
+
+}
+
+[data-rect="1"]{
+    width: 75px;
+    top: 31%;
+    left: 59%;
+    height: 195px;
+}
+
 
 .full{
     width: 100vw;
@@ -530,7 +606,8 @@ input:focus{
     border: var(--color-actor1) solid 2px;
 }
 
-[data-button]{
+[data-button],
+[data-button="0"] input{
     font-family: 'Work Sans', sans-serif;
     font-style: normal;
     font-weight: bold;

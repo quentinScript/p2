@@ -145,15 +145,17 @@
                     <h3 data-toggle-show="4" class="pointer none">+</h3>
                 </div>
                 <div data-show="4">
-                    <div id="actors"></div>
+                    <div id="actors">
+                        <div data-button="0"><input type="text" value="gg"></div>
+                    </div>
                     <div class="hovAdd relative" style="height:26px">
                         <div data-button="add">
                             <img src="./img/addPeople.svg" style="height:24px">
                         </div>
-                            <input placeholder="Acteur A" type="text" id="actor" value="" style="width: calc(100% - 40px);margin:5px">
-                            <div class="check">
-                                <span class="iconify" data-inline="false" data-icon="gg:check" style="font-size:24px; color:#E4E1E8; margin:2px"></span>
-                            </div>
+                        <input placeholder="Acteur A" type="text" id="actor" value="" style="width: calc(100% - 40px);margin:5px">
+                        <div class="check">
+                            <span class="iconify" data-inline="false" data-icon="gg:check" style="font-size:24px; color:#E4E1E8; margin:2px"></span>
+                        </div>
 
                     </div>
                     <!-- <div data-button="0">Eric</div> -->
@@ -208,7 +210,20 @@
         </div>
         <div class="apercu">
             <div id="apercuPrepa" class="none" style="height:calc(100% - 32px)">
-                <div id="imgPrepa"></div>
+                <div id="imgPrepa">
+                    <div data-rect="0">
+                        <div data-button="0">
+                            <span class="iconify" data-inline="false" data-icon="gg:close"style="background-color:#E4E1E8; border-radius: 2px;color: #628C6E;cursor:pointer"></span>
+                        </div>
+                    </div>
+                    <div data-rect="1">
+                        <div data-button="0">
+                            <span class="iconify" data-inline="false" data-icon="gg:close"style="background-color:#E4E1E8; border-radius: 2px;color: #628C6E;cursor:pointer"></span>
+                        </div>
+                    </div>
+                </div>
+                <div id="popUpSuivant" class="hide popup"></div>
+
             </div>
             <div id="apercuEditGlobal" class="row hide" style="height: calc(100% - 32px)">
                 <div class="apercuFinal .img-preview" >
@@ -226,6 +241,7 @@
                 <div>
                     <span class="iconify" data-inline="false" data-icon="gg:play-backwards"></span>
                     <span class="iconify" data-inline="false" data-icon="gg:play-button-o" style="width: 22px;"></span>
+                    <span class="iconify" id="prepaSuivant" data-inline="false" data-icon="gg:arrow-right-r" style="width: 22px;"></span>
                     <span class="iconify" data-inline="false" data-icon="gg:play-forwards"></span>
                 </div>
                 <div>
@@ -237,8 +253,8 @@
 
     <div class="overlay none">
         <div class="row s-between">
-        <h3>Share Répétition 15/05</h3>
-        <span id="close" class="iconify" data-inline="false" data-icon="gg:close"style="color:#E4E1E8; cursor:pointer"></span>
+            <h3>Share Répétition 15/05</h3>
+            <span id="close" class="iconify" data-inline="false" data-icon="gg:close"style="color:#E4E1E8; cursor:pointer"></span>
         </div>
         <br>
         <div class="block">
@@ -314,7 +330,7 @@
         </div>
     </div>
 
-    <div id="popUpAddActor" class="hide"></div>
+    <div id="popUpAddActor" class="hide popup"></div>
 
 
     <script src="https://code.iconify.design/1/1.0.6/iconify.min.js"></script>
