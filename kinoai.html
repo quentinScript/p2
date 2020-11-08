@@ -53,14 +53,19 @@
             <div class="block">
                 <div class="row s-between">
                     <h3>Acteurs sur scène</h3>
-                    <h3 data-toggle-show="0" class="pointer">-</h3>
-                    <h3 data-toggle-show="0" class="pointer none">+</h3>
+                    <div class="row">
+                        <span id="actorToggle" class="iconify" data-inline="false" data-icon="gg:boy"></span>
+                        <h3 data-toggle-show="0" class="pointer">-</h3>
+                        <h3 data-toggle-show="0" class="pointer none">+</h3>
+                    </div>
                 </div>
                 <div data-show="0">
-                    <!-- <div data-button="0">Eric</div>
-                    <div data-button="1">Jacques</div>
-                    <div data-button="disabled">Henry</div>
-                    <div data-button="disabled">Alexandre</div> -->
+                    <div id="actorPrepa"></div>
+                    <div  id="actorTracklet" class="none">
+                        <div data-button="1" data-num="98">Actor A</div>
+                        <div data-button="1" data-num="99">Actor B</div>
+
+                    </div>
                 </div>
             </div>
             <div class="block">
@@ -121,7 +126,7 @@
                     <div class="row s-between" style="height: 16px;">
                         <div class="row">
                             <label class="switch">
-                                <input type="checkbox" checked="checked" >
+                                <input id="togglePredecoupage" type="checkbox" >
                                 <span class="slider round"></span>
                             </label>
                             <p>Acteurs</p>
@@ -146,17 +151,24 @@
                 </div>
                 <div data-show="4">
                     <div id="actors">
-                        <div data-button="0"><input type="text" value="gg"></div>
+                        <!-- <div class="relative" style="height:40px" data-changeInput>
+                            <div data-button="0" class="absolute" style="z-index:2">
+                                <input type="text" value="gg" data-input>
+                            </div>
+                            <div class="check" data-remove>
+                                <span class="iconify" data-inline="false" data-icon="gg:close" style="color: #e4e1e8; font-size: 19px;margin: 4px;"></span>
+                            </div>
+                        </div> -->
+
                     </div>
                     <div class="hovAdd relative" style="height:26px">
                         <div data-button="add">
                             <img src="./img/addPeople.svg" style="height:24px">
                         </div>
                         <input placeholder="Acteur A" type="text" id="actor" value="" style="width: calc(100% - 40px);margin:5px">
-                        <div class="check">
+                        <div class="check" id="checkAdd">
                             <span class="iconify" data-inline="false" data-icon="gg:check" style="font-size:24px; color:#E4E1E8; margin:2px"></span>
                         </div>
-
                     </div>
                     <!-- <div data-button="0">Eric</div> -->
                 </div>
@@ -174,10 +186,10 @@
             </div>
             <div class="tools">
                 <span class="iconify" data-inline="false" data-icon="bi:cursor-fill" data-flip="horizontal"></span>
-                <span class="iconify" data-inline="false" data-icon="jam:cutter-f"></span>
+                <span class="iconify prepa none" data-inline="false" data-icon="jam:cutter-f"></span>
                 <!-- <span class="iconify" data-inline="false" data-icon="gg:erase"></span> -->
-                <div style="background-image:url(../img/erase.svg);background-size:contain; background-repeat:no-repeat; margin-bottom:6px"></div>
-                <span class="iconify" data-inline="false" data-icon="gg:arrows-merge-alt-h"></span>
+                <div class="prepa none" style="background-image:url(../img/erase.svg);background-size:contain; background-repeat:no-repeat; margin-bottom:6px"></div>
+                <span class="iconify " data-inline="false" data-icon="gg:arrows-merge-alt-h"></span>
                 <span class="iconify" data-inline="false" data-icon="whh:handdrag"></span>
             </div>
             <div class="timeSound prepa">
@@ -199,27 +211,36 @@
             <div class="time">
             </div>
             <div class="montageMain">
-                <div class="row" style="height:100%">
-                    <div style="width:15%"></div>
-                    <div style="width:35%"></div>
-                    <div style="width:25%"></div>
-                    <div style="width:25%"></div>
+                <div class="row none relative" id="montage" style="height:100%; position:relative">
+                    <div style="background-color: #82A681;width:15%"></div>
+                    <div style="background-color: #B2C7AF; width:35%"></div>
+                    <div style="background-color: #798A7E;width:25%"></div>
+                    <div style="background-color: #D1CFBD; width:25%"></div>
+                    <div class="b-rect" style="left: calc(15% - 15px)"></div>
+                    <div class="b-rect" style="left: calc(50% - 15px)"></div>
+                    <div class="b-rect" style="left: calc(75% - 15px)"></div>
+                </div>
+                <div id="montageVide" class="none"></div>
+            </div>
+            <div class="montagePerso none">
+                <div class="row" style="margin-top:4px">
+                    <div style="background-color:#82A681;width:10%"></div>
+                    <div style="background-color:#82a68159;width:90%"></div>
+                </div>
+                <div class="row" style="margin-top:4px">
+                    <div style="background-color:#B2C7AF;width:5%"></div>
+                    <div style="background-color:#B2C7AF59;width:95%"></div>
                 </div>
             </div>
-            <div class="montagePerso"> </div>
         </div>
         <div class="apercu">
             <div id="apercuPrepa" class="none" style="height:calc(100% - 32px)">
                 <div id="imgPrepa">
                     <div data-rect="0">
-                        <div data-button="0">
-                            <span class="iconify" data-inline="false" data-icon="gg:close"style="background-color:#E4E1E8; border-radius: 2px;color: #628C6E;cursor:pointer"></span>
-                        </div>
+                        <span class="iconify" data-inline="false" data-icon="gg:close"style="background-color:#E4E1E8; border-radius: 2px;color: #628C6E;cursor:pointer"></span>
                     </div>
                     <div data-rect="1">
-                        <div data-button="0">
-                            <span class="iconify" data-inline="false" data-icon="gg:close"style="background-color:#E4E1E8; border-radius: 2px;color: #628C6E;cursor:pointer"></span>
-                        </div>
+                        <span class="iconify" data-inline="false" data-icon="gg:close"style="background-color:#E4E1E8; border-radius: 2px;color: #628C6E;cursor:pointer"></span>
                     </div>
                 </div>
                 <div id="popUpSuivant" class="hide popup"></div>
@@ -241,7 +262,7 @@
                 <div>
                     <span class="iconify" data-inline="false" data-icon="gg:play-backwards"></span>
                     <span class="iconify" data-inline="false" data-icon="gg:play-button-o" style="width: 22px;"></span>
-                    <span class="iconify" id="prepaSuivant" data-inline="false" data-icon="gg:arrow-right-r" style="width: 22px;"></span>
+                    <span class="iconify" id="prepaSuivant" data-inline="false" data-icon="gg:arrow-right-r" style="width: 22px; cursor:pointer"></span>
                     <span class="iconify" data-inline="false" data-icon="gg:play-forwards"></span>
                 </div>
                 <div>
